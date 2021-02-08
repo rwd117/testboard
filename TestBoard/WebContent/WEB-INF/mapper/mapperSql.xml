@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="test_board">
+
+<insert id="board_insert" parameterType="kr.co.korea.beans.BoardBean">
+<![CDATA[
+ insert into Test_BOARD(Test_BNO, Test_TITLE, Test_CONTENT, Test_WRITER)
+ values(Test_BOARD_sq.nextval, #{Test_TITLE}, #{Test_CONTENT}, #{Test_WRITER})
+ ]]>
+</insert>
+
+
+
+<select id="board_list" resultType="kr.co.korea.beans.BoardBean">
+<![CDATA[
+ 	select Test_BNO, Test_TITLE, Test_CONTENT, Test_WRITER, Test_hit, REGDATE 
+ 	from Test_BOARD order by Test_BNO desc
+ ]]>
+
+</select>
+
+
+<select id="board_read" resultType="kr.co.korea.beans.BoardBean">
+<![CDATA[
+ 	select Test_BNO, Test_TITLE, Test_CONTENT, Test_WRITER, Test_hit, REGDATE 
+ 	from Test_BOARD where Test_BNO=#{Test_BNO}
+ ]]>
+
+</select>
+
+<update id="board_hitadd" parameterType="kr.co.korea.beans.BoardBean">
+
+<![CDATA[
+
+ update Test_BOARD set Test_hit=Test_hit+1 where Test_BNO=#{Test_BNO}
+ 
+ ]]>
+
+</update>
+
+<update id="board_update" parameterType="kr.co.korea.beans.BoardBean">
+
+<![CDATA[
+
+ update Test_BOARD set Test_TITLE=#{Test_TITLE}, 
+ 					Test_CONTENT=#{Test_CONTENT}
+ 					 where Test_BNO=#{Test_BNO}
+ 
+ ]]>
+
+</update>
+
+
+</mapper>
+
