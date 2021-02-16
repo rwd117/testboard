@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="test_reply">
+
+<select id="replylist" resultType="kr.co.korea.beans.ReplyBean" parameterType="kr.co.korea.beans.ReplyBean">
+
+	select reply_rno,reply_content,reply_writer,reply_regdate from Test_BOARD_reply where reply_bno=#{reply_bno}
+	order by reply_rno asc
+
+</select>
+
+<insert id="replyinsert" parameterType="kr.co.korea.beans.ReplyBean">
+
+	insert into Test_BOARD_reply(reply_bno,reply_rno,reply_content,reply_writer)
+	values(#{reply_bno},Test_BOARD_reply_seq.nextval,#{reply_content},#{reply_writer})
+
+</insert>
+
+<update id="replyupdate" parameterType="kr.co.korea.beans.ReplyBean">
+	update Test_BOARD_reply set reply_content=#{reply_content} 
+	where reply_rno=#{reply_rno} and reply_writer=#{reply_writer}
+</update>
+
+<delete id="replydelete" parameterType="kr.co.korea.beans.ReplyBean">
+
+	delete from Test_BOARD_reply where reply_bno=#{reply_bno} and reply_writer=#{reply_writer}
+
+</delete>
+
+<select id="replyselect" resultType="kr.co.korea.beans.ReplyBean">
+
+	select reply_bno,reply_rno,reply_content,reply_writer,reply_regdate
+	from Test_BOARD_reply	
+	where reply_rno=#{reply_rno}
+
+</select>
+
+
+
+
+</mapper>

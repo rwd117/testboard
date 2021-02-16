@@ -12,14 +12,19 @@
 <annotation-driven/>
 
 <context:component-scan base-package="kr.co.korea.controller"/>
-<!-- 
+<context:component-scan base-package="kr.co.korea.beans"/>
+<context:component-scan base-package="kr.co.korea.dao"/>
+<context:component-scan base-package="kr.co.korea.service"/>
+
+
 <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	<beans:property name="prefix" value="/board/"></beans:property>
-	<beans:property name="suffix" value=".jsp"></beans:property>
+	<beans:property name="prefix" value="/WEB-INF/views/"></beans:property>
+<!-- 	<beans:property name="suffix" value=".jsp"></beans:property>  -->
 </beans:bean>
- -->
-<!-- <resources location="/resources/" mapping="/**"></resources>
- -->
+
+ 
+ <resources location="/resources/" mapping="/**"></resources>
+ 
 
 <beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 	<beans:property  name="location">
@@ -43,6 +48,11 @@
 <beans:bean class="org.mybatis.spring.SqlSessionTemplate" >
 	<beans:constructor-arg index="0" ref="sqlSession"></beans:constructor-arg>
 </beans:bean>
+
+
+
+
+
 </beans:beans>
 
 

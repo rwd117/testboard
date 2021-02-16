@@ -60,7 +60,7 @@ public class Criteria {
 		rowEnd=rowStart+perPageNum-1;
 		return rowEnd;
 	}
-
+	
 		
 	
 }

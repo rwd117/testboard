@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="test_board">
+
+<insert id="board_insert" parameterType="kr.co.korea.beans.BoardBean">
+<![CDATA[
+ insert into Test_BOARD(Test_BNO, Test_TITLE, Test_CONTENT, Test_WRITER)
+ values(Test_BOARD_sq.nextval, #{Test_TITLE}, #{Test_CONTENT}, #{Test_WRITER})
+ ]]>
+</insert>
+
+<select id="board_read" resultType="kr.co.korea.beans.BoardBean">
+<![CDATA[
+ 	select Test_BNO, Test_TITLE, Test_CONTENT, Test_WRITER, Test_hit, REGDATE 
+ 	from Test_BOARD where Test_BNO=#{Test_BNO}
+ ]]>
+
+</select>
+
+<select id="board_list" resultType="kr.co.korea.beans.BoardBean" parameterType="kr.co.korea.beans.SearchCriteria">
+
+ 	select Test_BNO, Test_TITLE, Test_CONTENT, Test_WRITER, Test_hit, REGDATE
+ 	from ( select ROW_NUMBER() over(order by Test_BNO desc) as RNUM, tb.* from Test_BOARD tb <include refid="search"></include>)
+ 	Test_BOARD 
+ 	where RNUM between #{rowStart} and #{rowEnd}
+
+</select>
+
+<select id="board_boardcount" resultType="int" parameterType="kr.co.korea.beans.SearchCriteria">
+
+ 	select count(Test_BNO) from Test_BOARD <include refid="search"></include>
+
+</select>
+
+
+<sql id="search">
+	<if test="searchType!=null">
+		<if test="searchType == 'a'.toString()">where (Test_TITLE LIKE '%' || #{keyword} || '%') or (Test_CONTENT LIKE '%' || #{keyword} || '%') or (Test_WRITER LIKE '%' || #{keyword} || '%')</if>	
+		<if test="searchType == 't'.toString()">where Test_TITLE LIKE '%' || #{keyword} || '%'</if>	
+		<if test="searchType == 'c'.toString()">where Test_CONTENT LIKE '%' || #{keyword} || '%'</if>	
+		<if test="searchType == 'w'.toString()">where Test_WRITER LIKE '%' || #{keyword} || '%'</if>	
+		<if test="searchType == 'tc'.toString()">where (Test_TITLE LIKE '%' || #{keyword} || '%') or (Test_CONTENT LIKE '%' || #{keyword} || '%')</if>	
+	</if>
+</sql>
+
+
+
+<update id="board_hitadd" parameterType="kr.co.korea.beans.BoardBean">
+
+<![CDATA[
+
+ update Test_BOARD set Test_hit=Test_hit+1 where Test_BNO=#{Test_BNO}
+ 
+ ]]>
+
+</update>
+
+<update id="board_update" parameterType="kr.co.korea.beans.BoardBean">
+
+<![CDATA[
+
+ update Test_BOARD set Test_TITLE=#{Test_TITLE}, 
+ 					Test_CONTENT=#{Test_CONTENT}
+ 					 where Test_BNO=#{Test_BNO}
+ 
+ ]]>
+
+</update>
+
+<delete id="board_delete" parameterType="kr.co.korea.beans.BoardBean" >
+
+<![CDATA[
+
+delete from Test_BOARD where Test_BNO=#{Test_BNO} and Test_WRITER=#{Test_WRITER}
+ 
+ ]]>
+
+</delete>
+
+<!-- 
+<select id="board_list" resultType="kr.co.korea.beans.BoardBean">
+<![CDATA[
+ 	select Test_BNO, Test_TITLE, Test_CONTENT, Test_WRITER, Test_hit, REGDATE 
+ 	from Test_BOARD order by Test_BNO desc
+ ]]>
+
+</select> -->
+
+</mapper>
+
