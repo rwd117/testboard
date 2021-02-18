@@ -39,10 +39,10 @@
 							<td>${board.test_BNO}</td>
 							<td><a
 								href="read?test_BNO=${board.test_BNO}
-						 &page=${cri.page}
-						 &perPageNum=${cri.perPageNum}
-						 &searchType=${cri.searchType}
-						 &keyword=${cri.keyword}">${board.test_TITLE}</a></td>
+									 &page=${cri.page}
+									 &perPageNum=${cri.perPageNum}
+									 &searchType=${cri.searchType}
+									 &keyword=${cri.keyword}">${board.test_TITLE}</a></td>
 							<td>${board.test_CONTENT}</td>
 							<td>${board.test_WRITER}</td>
 							<td>${board.test_hit}</td>

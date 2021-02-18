@@ -1,5 +1,6 @@
 package kr.co.korea.controller;
 
+
 import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,6 @@ import kr.co.korea.service.ReplyService;
 
 @Controller
 public class BoardController {
-
 	
 	@Autowired
 	@Lazy
@@ -32,6 +32,7 @@ public class BoardController {
 	
 	@GetMapping("write")
 	public String write(Model model,@ModelAttribute("cri") SearchCriteria cri) {
+		
 		
 		model.addAttribute("cri",cri);
 		return "/board/write.jsp";
@@ -117,18 +118,18 @@ public class BoardController {
 		return "redirect:/list";
 	}
 	
-	@GetMapping("/replywrite")
-	public String replywrite(ReplyBean replybean, @ModelAttribute("cri") SearchCriteria cri ,RedirectAttributes rttr) throws Exception {
-		replyservice.writereply(replybean);
-		
-		rttr.addAttribute("test_BNO",replybean.getReply_bno());
-		rttr.addAttribute("page",cri.getPage());
-		rttr.addAttribute("perPageNum",cri.getPerPageNum());
-		rttr.addAttribute("searchType",cri.getSearchType());
-		rttr.addAttribute("keyword",cri.getKeyword());
-		
-		return "redirect:/read";
-	}
+//	@GetMapping("/replywrite")
+//	public String replywrite(ReplyBean replybean, @ModelAttribute("cri") SearchCriteria cri ,RedirectAttributes rttr) throws Exception {
+//		replyservice.writereply(replybean);
+//		
+//		rttr.addAttribute("test_BNO",replybean.getReply_bno());
+//		rttr.addAttribute("page",cri.getPage());
+//		rttr.addAttribute("perPageNum",cri.getPerPageNum());
+//		rttr.addAttribute("searchType",cri.getSearchType());
+//		rttr.addAttribute("keyword",cri.getKeyword());
+//		
+//		return "redirect:/read";
+//	}
 	
 	@GetMapping("/replyupdate")
 	public String replyupdate(ReplyBean replybean,Model model,SearchCriteria cri) throws Exception  {

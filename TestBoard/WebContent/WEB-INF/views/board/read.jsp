@@ -13,17 +13,6 @@
 	rel="stylesheet"
 	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
 	crossorigin="anonymous">
-
-<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
-<script>
-$(document).ready(function(){
-
-	getreplylist();
-
-});
-
-
-</script>
 <style>
 textarea {
 	resize: none;
@@ -33,6 +22,65 @@ li {
 	list-style: none;
 }
 </style>
+
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script>
+$(document).ready(function(){
+	getreplylist();
+});
+
+function getreplylist(){
+	var replyurl = "${root}board/replylist/"
+	var reply_bno = $('#reply_bno').val();
+	
+	$.ajax({
+		url : replyurl+reply_bno,
+		type : 'POST',
+		dataType: 'json',
+		success : function(result){
+		var comments = "";
+		var ana="";
+		if(result.length < 1){
+			comments.push("등록된 댓글이 없습니다.");
+			
+		}else{
+			$(result).each(function(){
+				comments +='<br/>';
+				comments +='<strong>';
+				comments +='작성자 : ' + this.reply_writer;
+				comments +='</strong>&nbsp;&nbsp;&nbsp;&nbsp;';
+				comments +='작성 날짜 : '+ this.reply_regdate;
+				comments += '<br/> <p>';
+				comments +='댓글 내용 : &nbsp;&nbsp;&nbsp;';
+				comments +=this.reply_content;
+				comments +='</p>';
+				comments +='<br/>';
+				comments +='<button type="button" class="btn btn-outline-success" id="replyupdateBtn"';
+				comments +='data-rno='+this.reply_rno+'>'
+				comments +='댓글수정';
+				comments +='</button>';
+				comments +='<button type="button" class="btn btn-outline-success" id="replydeleteBtn"';
+				comments +='data-rno='+this.reply_rno+'>';
+				comments +='댓글 삭제';
+				comments +='</button>';
+				comments +='<br/>';
+			});
+		};
+			$("#replylist").html(comments);
+		}
+	});
+};
+
+function getFormatDate(date){ <!--ajax에서는 data형식을 읽을수 없으므로 자바스크립트에서 data형식으로 바꿈 !-->
+var year = date.getFullYear();             
+var month = (1 + date.getMonth());         
+month = month >= 10 ? month : '0' + month; 
+var day = date.getDate();                   
+day = day >= 10 ? day : '0' + day;         
+return  year + '-' + month + '-' + day;      
+}
+
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -70,7 +118,7 @@ li {
 
 		<hr />
 		<div class="col-md-6">
-			<form name="replyform" action="replywrite" method="get">
+			<form name="replyform" action="replywrite" method="post">
 				<input type="hidden" id="page" name="page" value="${cri.page}">
 				<input type="hidden" id="perPageNum" name="perPageNum"
 					value="${cri.perPageNum}"> <input type="hidden"
@@ -84,15 +132,17 @@ li {
 				<label for="reply_content">댓글 내용 :</label>
 				<textarea class="form-control" id="reply_content"
 					name="reply_content"></textarea>
-
-				<br />
-
-				<button type="submit" class="btn btn-outline-success"
+				<button type="button" class="btn btn-outline-success"
 					id="replywriteBtn">댓글 작성</button>
+				<br />
 			</form>
+
+
+
 		</div>
 		<br />
 		<hr />
+
 
 		<div class="container">
 			<!--<ul class="list-group list-group-flush">
@@ -122,56 +172,24 @@ li {
 
 	<script>
 
-
-function getreplylist(){
-	var replyurl = "${root}board/replylist/"
-	var reply_bno = $('#reply_bno').val();
 	
-	$.ajax({
-		url : replyurl+reply_bno,
-		type : 'POST',
-		dataType: 'json',
-		success : function(result){
-		var comments = "";
-		var ana="";
-		if(result.length < 1){
-			comments.push("등록된 댓글이 없습니다.");
-			
-		}else{
-			$(result).each(function(){
-				
-				comments +='<strong>';
-				comments +='작성자 : ' + this.reply_writer;
-				comments +='</strong>&nbsp;&nbsp;&nbsp;&nbsp;';
-				comments +='작성 날짜 : '+ this.reply_regdate;
-				comments += '<br/>';
-				comments +='댓글 내용 :';
-				comments +='<span>';
-				comments +=this.reply_content;
-				comments +='</span>'
-				comments +='<br/>'
-			});
-		};
-			$("#replylist").html(comments);
-		}
-	});
-};
-
-
-function getFormatDate(date){
-    var year = date.getFullYear();             
-    var month = (1 + date.getMonth());         
-    month = month >= 10 ? month : '0' + month; 
-    var day = date.getDate();                   
-    day = day >= 10 ? day : '0' + day;         
-    return  year + '-' + month + '-' + day;      
-}
-
-
-
-
+	
+	
+	
+	
 $(function(){
-	$("#replyupdateBtn").click(function(){
+	
+
+	$(".alistBtn").click(function(){
+		var listurl = "list?page=${cri.page}"+
+						"&perPageNum=${cri.perPageNum}"+
+						"&searchType=${cri.searchType}"+
+						"&keyword=${cri.keyword}";
+		location.href = listurl;
+	});
+	
+	
+<!--	$("#replyupdateBtn").click(function(){
 		var replyupdateurl ="replyupdate?"+
 							"page=${cri.page}"+
 							"&perPageNum=${cri.perPageNum}"+
@@ -191,15 +209,6 @@ $(function(){
 							"&reply_rno="+$(this).attr("data-rno");
 		location.href=replydeleteurl;
 	});
-	
-	$(".alistBtn").click(function(){
-		var listurl = "list?page=${cri.page}"+
-						"&perPageNum=${cri.perPageNum}"+
-						"&searchType=${cri.searchType}"+
-						"&keyword=${cri.keyword}";
-		location.href = listurl;
-	});
-	
 	$(".replywriteBtn").click(function(){
 		var writeurl = "list?page=${cri.page}"+
 						"&perPageNum=${cri.perPageNum}"+
@@ -207,6 +216,7 @@ $(function(){
 						"&keyword=${cri.keyword}";
 		location.href = writeurl;
 	});
+	!-->
 });
 
 

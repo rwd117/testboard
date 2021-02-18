@@ -24,9 +24,26 @@ public class ReplyRestController {
 		
 		List<ReplyBean> replylist = replyservice.list(reply_bno);
 		
-		
 		return replylist;
 	}
 	
+
+	
+	//@PostMapping("/replywrite")
+//	public Map<String,Object> replywrite(@RequestBody ReplyBean replybean) {
+//		 Map<String,Object> map=  new HashMap<String, Object>();
+//			try {
+//				
+//				replyservice.writereply(replybean);
+//				map.put("result", "success");
+//				
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//				map.put("result", "fail");
+//			}
+//		return map;
+//	}
+//	
 	
 }

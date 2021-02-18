@@ -11,6 +11,7 @@
 <hr/>
 
 <div>
+
 <form name="replyform" action="replyupdate_result" method="get">
 	<input type="hidden" id="reply_bno" name="reply_bno" value="${replyupdate.reply_bno}" />
 	<input type="hidden" id="reply_rno" name="reply_rno" value="${replyupdate.reply_rno}" />

@@ -32,6 +32,7 @@
     	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     
+    
      <!-- 5) 파라미터에 한글이 지원 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
