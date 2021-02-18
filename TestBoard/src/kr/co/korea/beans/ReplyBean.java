@@ -2,12 +2,16 @@ package kr.co.korea.beans;
 
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ReplyBean {
 	
 	private int reply_bno;//게시물 번호
 	private int reply_rno;//댓글 번호
 	private String reply_content;//댓글 내용
 	private String reply_writer;//댓글 작성자
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date reply_regdate;//댓글 작성 날짜
 	
 	public int getReply_bno() {

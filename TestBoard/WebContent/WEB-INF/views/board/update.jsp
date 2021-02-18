@@ -1,5 +1,6 @@
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<c:import url="/WEB-INF/views/include/top_menu.jsp" />
+
+
 <h2>${read.test_BNO}번 게시물 수정</h2>
 
 <form action="update_result">

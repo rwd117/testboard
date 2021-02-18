@@ -25,7 +25,7 @@
 
 <delete id="replydelete" parameterType="kr.co.korea.beans.ReplyBean">
 
-	delete from Test_BOARD_reply where reply_bno=#{reply_bno} and reply_writer=#{reply_writer}
+	delete from Test_BOARD_reply where reply_rno=#{reply_rno} and reply_bno=#{reply_bno} and reply_writer=#{reply_writer}
 
 </delete>
 

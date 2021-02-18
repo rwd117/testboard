@@ -1,7 +1,6 @@
 package kr.co.korea.controller;
 
-import java.util.List;
-
+import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,20 +23,24 @@ public class BoardController {
 
 	
 	@Autowired
+	@Lazy
 	BoardService service;
 	
 	@Autowired
+	@Lazy
 	ReplyService replyservice;
 	
 	@GetMapping("write")
-	public String write() {
+	public String write(Model model,@ModelAttribute("cri") SearchCriteria cri) {
+		
+		model.addAttribute("cri",cri);
 		return "/board/write.jsp";
 	}
 	
 	@GetMapping("write_result")
 	public String write_result(BoardBean boardbean) throws Exception {
 		service.write(boardbean);
-		return "redirect:/index";
+		return "redirect:/list";
 	}
 	
 	@RequestMapping(value="list" ,method={RequestMethod.GET, RequestMethod.POST})
@@ -62,10 +65,7 @@ public class BoardController {
 		service.addhit(boardbean.getTest_BNO());
 		
 		model.addAttribute("cri",cri);
-		
-		List<ReplyBean> replylist = replyservice.list(boardbean.getTest_BNO());
-		model.addAttribute("replylist",replylist);
-		
+		model.addAttribute("reply",new ReplyBean());
 		
 		return "/board/read.jsp";
 	}
@@ -120,11 +120,6 @@ public class BoardController {
 	@GetMapping("/replywrite")
 	public String replywrite(ReplyBean replybean, @ModelAttribute("cri") SearchCriteria cri ,RedirectAttributes rttr) throws Exception {
 		replyservice.writereply(replybean);
-		
-		System.out.println(replybean.getReply_bno());
-		System.out.println(replybean.getReply_rno());
-		System.out.println(replybean.getReply_content());
-		System.out.println(replybean.getReply_writer());
 		
 		rttr.addAttribute("test_BNO",replybean.getReply_bno());
 		rttr.addAttribute("page",cri.getPage());
