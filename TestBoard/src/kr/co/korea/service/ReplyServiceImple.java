@@ -26,7 +26,9 @@ public class ReplyServiceImple implements ReplyService{
 	public void writereply(ReplyBean replybean) throws Exception {
 		dao.writeReply(replybean);
 	}
-
+	
+	
+	
 	@Override
 	public void updateReply(ReplyBean replybean) throws Exception {
 		// TODO Auto-generated method stub

@@ -32,6 +32,12 @@
 	</beans:property>
 </beans:bean>
 
+
+<beans:bean class="org.springframework.context.support.MessageSourceAccessor" 
+id="sourceAccessor">
+	<beans:constructor-arg ref="messageSource"/>
+</beans:bean>
+
 <beans:bean class="org.apache.commons.dbcp2.BasicDataSource" id="basic_data_source">
 	<beans:property name="driverClassName" value="${db.classname}" />
 	<beans:property name="url" value="${db.url}" />
