@@ -14,7 +14,7 @@ import kr.co.korea.dao.ReplyDAO;
 public class ReplyServiceImple implements ReplyService{
 	
 	@Autowired
-	ReplyDAO dao;
+	private ReplyDAO dao;
 	
 	@Override
 	public List<ReplyBean> list(int reply_bno) throws Exception {
@@ -33,7 +33,6 @@ public class ReplyServiceImple implements ReplyService{
 	public void updateReply(ReplyBean replybean) throws Exception {
 		// TODO Auto-generated method stub
 		dao.updateReply(replybean);
-		
 	}
 
 	@Override
@@ -42,10 +41,5 @@ public class ReplyServiceImple implements ReplyService{
 		dao.deleteReply(replybean);
 	}
 
-	@Override
-	public ReplyBean selectReply(int reply_rno) throws Exception {
-		// TODO Auto-generated method stub
-		return dao.selectReply(reply_rno);
-	}
 	
 }

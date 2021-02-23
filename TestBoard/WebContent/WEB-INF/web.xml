@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<web-app version="4.0"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee                       
 	http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
 
@@ -9,52 +10,52 @@
 		<servlet-name>testServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- 2) 웹애플리케이션 설정 파일은 servlet-context.xml로 지정 -->
 	<servlet>
 		<servlet-name>testServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-        	<param-value>/WEB-INF/config/servlet-context.xml</param-value>
+			<param-value>/WEB-INF/config/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	
-	<!-- 3) 프로젝트 수행시 사용할 Bean들을 정의해두는 파일은 root-context.xml로 지정-->
+
+	<!-- 3) 프로젝트 수행시 사용할 Bean들을 정의해두는 파일은 root-context.xml로 지정 -->
 	<context-param>
-    	<param-name>contextConfigLocation</param-name>
-    	<param-value>/WEB-INF/config/root-context.xml</param-value>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/config/root-context.xml</param-value>
 	</context-param>
 
 	<!-- 4) listener클래스는 2),3) 동작이 자동으로 로딩된다 -->
-    <listener>
-    	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    
-    
-     <!-- 5) 파라미터에 한글이 지원 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+
+	<!-- 5) 파라미터에 한글이 지원 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-	
+
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
 		</init-param>
-	
+
 		<init-param>
 			<param-name>forceEncoding</param-name>
 			<param-value>true</param-value>
 		</init-param>
 	</filter>
-	
+
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
-  </web-app>
+
+</web-app>
 
 
 

@@ -33,12 +33,11 @@ public class BoardController {
 	@GetMapping("write")
 	public String write(Model model,@ModelAttribute("cri") SearchCriteria cri) {
 		
-		
 		model.addAttribute("cri",cri);
 		return "/board/write.jsp";
 	}
 	
-	@GetMapping("write_result")
+	@PostMapping("write_result")
 	public String write_result(BoardBean boardbean) throws Exception {
 		service.write(boardbean);
 		return "redirect:/list";
@@ -118,67 +117,7 @@ public class BoardController {
 		return "redirect:/list";
 	}
 	
-//	@GetMapping("/replywrite")
-//	public String replywrite(ReplyBean replybean, @ModelAttribute("cri") SearchCriteria cri ,RedirectAttributes rttr) throws Exception {
-//		replyservice.writereply(replybean);
-//		
-//		rttr.addAttribute("test_BNO",replybean.getReply_bno());
-//		rttr.addAttribute("page",cri.getPage());
-//		rttr.addAttribute("perPageNum",cri.getPerPageNum());
-//		rttr.addAttribute("searchType",cri.getSearchType());
-//		rttr.addAttribute("keyword",cri.getKeyword());
-//		
-//		return "redirect:/read";
-//	}
-	
-	@GetMapping("/replyupdate")
-	public String replyupdate(ReplyBean replybean,Model model,SearchCriteria cri) throws Exception  {
-		
-		model.addAttribute("replyupdate",replyservice.selectReply(replybean.getReply_rno()));
-		model.addAttribute("cri",cri);
-		
-		return "/board/replyupdate.jsp";
-	}
-	
-	@GetMapping("/replyupdate_result")
-	public String replyupdate_result(ReplyBean replybean, SearchCriteria cri ,RedirectAttributes rttr) throws Exception {
-		
-		replyservice.updateReply(replybean);
-		
-		rttr.addAttribute("test_BNO",replybean.getReply_bno());
-		rttr.addAttribute("page",cri.getPage());
-		rttr.addAttribute("perPageNum",cri.getPerPageNum());
-		rttr.addAttribute("searchType",cri.getSearchType());
-		rttr.addAttribute("keyword",cri.getKeyword());
-		
-		return "redirect:/read";
-	}
-	
-	@GetMapping("/replydelete")
-	public String replydelete(ReplyBean replybean,Model model,SearchCriteria cri) throws Exception {
-		model.addAttribute("replydelete",replyservice.selectReply(replybean.getReply_rno()));
-		model.addAttribute("cri",cri);
-		
-		return"/board/replydelete.jsp";
-	}
-	
-	
-	@GetMapping("/replydelete_result")
-	public String replydelete_result(ReplyBean replybean,SearchCriteria cri ,RedirectAttributes rttr)throws Exception {
-		
-		replyservice.deleteReply(replybean);
-		
-		rttr.addAttribute("test_BNO",replybean.getReply_bno());
-		rttr.addAttribute("page",cri.getPage());
-		rttr.addAttribute("perPageNum",cri.getPerPageNum());
-		rttr.addAttribute("searchType",cri.getSearchType());
-		rttr.addAttribute("keyword",cri.getKeyword());
-		
-		return "redirect:/read";
-	}
-	
-	
-	
+
 	
 	
 }

@@ -20,22 +20,15 @@
 
 <update id="replyupdate" parameterType="kr.co.korea.beans.ReplyBean">
 	update Test_BOARD_reply set reply_content=#{reply_content} 
-	where reply_rno=#{reply_rno} and reply_writer=#{reply_writer}
+	where reply_rno=#{reply_rno}
 </update>
+
 
 <delete id="replydelete" parameterType="kr.co.korea.beans.ReplyBean">
 
-	delete from Test_BOARD_reply where reply_rno=#{reply_rno} and reply_bno=#{reply_bno} and reply_writer=#{reply_writer}
+	delete from Test_BOARD_reply where reply_rno=#{reply_rno}
 
 </delete>
-
-<select id="replyselect" resultType="kr.co.korea.beans.ReplyBean">
-
-	select reply_bno,reply_rno,reply_content,reply_writer,reply_regdate
-	from Test_BOARD_reply	
-	where reply_rno=#{reply_rno}
-
-</select>
 
 
 

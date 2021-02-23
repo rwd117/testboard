@@ -37,12 +37,5 @@ public class ReplyDAOImpl implements ReplyDAO{
 		// TODO Auto-generated method stub
 		sqltemp.delete("test_reply.replydelete",replybean);
 	}
-
-	@Override
-	public ReplyBean selectReply(int reply_rno) throws Exception {
-		// TODO Auto-generated method stub
-		return sqltemp.selectOne("test_reply.replyselect",reply_rno);
-	}
-	
 	
 }

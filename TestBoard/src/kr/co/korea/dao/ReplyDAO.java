@@ -14,5 +14,4 @@ public interface ReplyDAO {
 	
 	public void deleteReply(ReplyBean replybean) throws Exception;
 	
-	public ReplyBean selectReply(int reply_rno) throws Exception;
 }
