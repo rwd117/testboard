@@ -9,7 +9,7 @@
  본인 총 1명
  
 ## 기술 스택
- - Backend : Spring | Java 8 | Oracle | Mybatis | Tomcat 9.0
+ - Backend : Spring | Java 8 | Oracle | Mybatis | Tomcat 9.0 | Ajax
  - Frontend : css | Bootstrap   
 
 ## 기능
