@@ -18,6 +18,8 @@
  
  꾸미는 것에는 자신이 없어서 Bootstrap를 이용
  
+ 자세한 것은 개인블로그(https://coie117.tistory.com/)의 Spring  
+ 
  --------------------------
  1. Create
     - 게시물 작성 및 댓글 작성
