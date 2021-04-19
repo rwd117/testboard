@@ -16,7 +16,7 @@
 
  게시판 CRUD 구현 및 Aajx를 이용한 댓글 작성
  
- 꾸미는 것에는 자신이 없어서 Bootstrap를 이용
+프론트 엔드는 부트스트랩을 이용
  
  자세한 것은 [개인블로그](https://coie117.tistory.com/)의 Spring 카테고리 참고
  
